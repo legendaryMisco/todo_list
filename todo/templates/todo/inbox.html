@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% block content %}
+  <!-- Main Section -->
+  <main class="inbox my-xl">
+    <div class="content-box">
+      <h3 class="inbox__title">TODO REMINDER</h3>
+      <ul class="messages">
+        {% for list in todo %}
+        <li class="message message--unread">
+          <a href="message.html">
+            <span class="message__author">{{list.title}}</span>
+            <span class="message__subject">{{list.body}}</span>
+            <span class="message__date">{{list.time_reminder}}</span>
+          </a>
+        </li>
+        {% endfor %}
+
+
+
+<!--        <li class="message">-->
+<!--          <a href="message.html">-->
+<!--            <span class="message__author">Sulamita Ivanov</span>-->
+<!--            <span class="message__subject">Another Opportunity for Side Income</span>-->
+<!--            <span class="message__date">May 29, 2021, 09:45 AM</span>-->
+<!--          </a>-->
+<!--        </li>-->
+
+      </ul><br> <h3 class="inbox__title">Messages</h3>
+      <ul class="messages">
+        {% for chat in chats %}
+        {% if chat.sender == request.user.register %}
+        <li class="message message--unread">
+          <a href="message.html">
+            <span class="message__author">you send</span>
+            <span class="message__subject">{{chat.message}}</span>
+            <span class="message__date">to {{chat.receiver_id}}</span>
+          </a>
+        </li>
+        {% else %}
+         <li class="message message--unread">
+          <a href="message.html">
+            <span class="message__author">{{chat.message}}</span>
+             <a  href="{% url 'find-friends' %}"><span class="message__subject">from {{chat.sender}}</span></a>
+            <span class="message__date">{{chat.created_date}}</span>
+          </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+
+
+
+<!--        <li class="message">-->
+<!--          <a href="message.html">-->
+<!--            <span class="message__author">Sulamita Ivanov</span>-->
+<!--            <span class="message__subject">Another Opportunity for Side Income</span>-->
+<!--            <span class="message__date">May 29, 2021, 09:45 AM</span>-->
+<!--          </a>-->
+<!--        </li>-->
+      </ul>
+    </div>
+  </main>
+
+
+
+
+{% endblock content %}

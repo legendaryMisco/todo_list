@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block content %}
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <a class="backButton" href="{% url 'lists' %}"><i class="im im-angle-left"></i></a>
+                {% if action == 'update' %}
+                <center><h2>UPDATE TODO LIST</h2></center>
+                {% else %}
+                <center><h2>CREATE TODO LIST</h2></center>
+                {% endif %}
+                <br>
+
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <!-- Input:Text -->
+                    {% for field in form %}
+                    <div class="form__field">
+                        <label for="formInput#text">{{field.label}}: </label>
+                        {{field}}
+                    </div>
+                    {% for error in field.errors %}
+                    <p style="color:red;">{{error}}</p>
+                    {% endfor %}
+
+                    {% endfor %}
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

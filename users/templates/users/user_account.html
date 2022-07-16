@@ -1,0 +1,101 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+ <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="im im-edit"></i> Edit</a>
+              <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" />
+              <h2 class="dev__name">{{profile.username}}</h2>
+              <p class="dev__title">{{profile.short_intro}}</p>
+              <p class="dev__location">{{profile.fullname}}</p>
+
+<!--              <a href="#" class="btn btn&#45;&#45;sub btn&#45;&#45;lg">Send Message </a>-->
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">{{profile.bio}}</p>
+          </div>
+          <div class="settings">
+            <h3 class="settings__title">Todo Reminder</h3>
+
+          </div>
+
+          <table class="settings__table">
+
+            {% for list in toplist %}
+            <tr>
+              <td class="settings__tableInfo">
+                <h4>{{list.title}}</h4>
+                <p>
+                  {{list.body}}
+                </p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-list' list.id  %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-list' list.id  %}?next={% url 'account' %}"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+
+
+          </table>
+
+          <div class="settings">
+            <h3 class="settings__title">All todo</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-list'  %}"><i class="im im-plus"></i> Add New List</a>
+          </div>
+
+          <table class="settings__table">
+            {% for list in profile.todo_set.all %}
+            <tr>
+              <td class="settings__thumbnail">
+                <a href="single-project.html"><img src="{{list.owner.profile_image.url}}" alt="Project Thumbnail" /></a>
+              </td>
+              <td class="settings__tableInfo">
+                <a href="single-project.html">{{list.title}}</a>
+                <p>{{list.body}}</p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-list' list.id  %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-list' list.id  %}"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+
+          </table>
+           <div class="settings">
+            <h3 class="settings__title">Other Option</h3>
+
+          </div>
+          <br>
+          <a class="btn btn--main" href="{% url 'delete-account' %}">Delete Account</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+

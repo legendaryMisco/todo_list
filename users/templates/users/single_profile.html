@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+ <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" />
+              <h2 class="dev__name">{{profile.username}}</h2>
+              <p class="dev__title">{{profile.short_intro}}</p>
+
+              <a href="{% url 'direct-message' profile.id %}" class="btn btn--sub btn--lg  my-md">Send Message </a>
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">{{profile.bio}}</p>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
